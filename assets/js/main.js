@@ -71,7 +71,4 @@ t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('2339662163
 ;
 t_onFuncLoad('t396_initialScale',function() {t396_initialScale('2355506823');});t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('2355506823');});});
 ;
-if(!window.mainTracker) {window.mainTracker='tilda';}
-window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'f1858a1c1e1fba20f7e23d6ee739727b','script','./assets/js/tilda-stat-1.0.min.js');},2000);
-;
 t_onReady(function(){try{var name=new URLSearchParams(window.location.search).get('name');if(!name)return;name=name.trim();if(!name)return;var input=document.getElementById('in-1779545557677')||document.querySelector('input[name="Nom"]');if(input){input.value=name;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));}var g=document.getElementById('perso-greeting');if(g){g.textContent=name;g.style.display='block';g.style.fontWeight='bold';g.style.fontSize='xx-large';}}catch(e){}});
