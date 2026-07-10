@@ -55,7 +55,7 @@ t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('2339662063
 ;
 t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('2339662083');});});
 ;
-const eventLocal=new Date(2026,7,21,20,0,0);const interval=setInterval(()=>{const now=new Date();const distance=eventLocal - now;if(distance<0) {clearInterval(interval);document.getElementById("countdownContainer").innerHTML="EXPIRED";return;}
+const eventLocal=new Date(2026,7,21,21,0,0);const interval=setInterval(()=>{const now=new Date();const distance=eventLocal - now;if(distance<0) {clearInterval(interval);document.getElementById("countdownContainer").innerHTML="EXPIRED";return;}
 document.getElementById("days").textContent=String(Math.floor(distance/(1000*60*60*24))).padStart(2,'0');document.getElementById("hours").textContent=String(Math.floor((distance%(1000*60*60*24))/(1000*60*60))).padStart(2,'0');document.getElementById("minutes").textContent=String(Math.floor((distance%(1000*60*60))/(1000*60))).padStart(2,'0');document.getElementById("seconds").textContent=String(Math.floor((distance%(1000*60))/1000)).padStart(2,'0');},1000);
 ;
 t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('2339662093');});});
