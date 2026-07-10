@@ -55,7 +55,7 @@ t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('2339662063
 ;
 t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('2339662083');});});
 ;
-const eventLocal=new Date(2026,7,21,20,00,0);const interval=setInterval(()=>{const now=new Date();const distance=eventLocal - now;if(distance<0) {clearInterval(interval);document.getElementById("countdownContainer").innerHTML="EXPIRED";return;}
+const eventLocal=new Date(2026,7,21,20,0,0);const interval=setInterval(()=>{const now=new Date();const distance=eventLocal - now;if(distance<0) {clearInterval(interval);document.getElementById("countdownContainer").innerHTML="EXPIRED";return;}
 document.getElementById("days").textContent=String(Math.floor(distance/(1000*60*60*24))).padStart(2,'0');document.getElementById("hours").textContent=String(Math.floor((distance%(1000*60*60*24))/(1000*60*60))).padStart(2,'0');document.getElementById("minutes").textContent=String(Math.floor((distance%(1000*60*60))/(1000*60))).padStart(2,'0');document.getElementById("seconds").textContent=String(Math.floor((distance%(1000*60))/1000)).padStart(2,'0');},1000);
 ;
 t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('2339662093');});});
@@ -79,4 +79,51 @@ t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('2339662163
 ;
 t_onFuncLoad('t396_initialScale',function() {t396_initialScale('2355506823');});t_onReady(function() {t_onFuncLoad('t396_init',function() {t396_init('2355506823');});});
 ;
-t_onReady(function(){try{var name=new URLSearchParams(window.location.search).get('name');if(!name)return;name=name.trim();if(!name)return;var input=document.getElementById('in-1779545557677')||document.querySelector('input[name="Nom"]');if(input){input.value=name;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));}var g=document.getElementById('perso-greeting');if(g){g.textContent=name;g.style.display='block';g.style.fontWeight='bold';g.style.fontSize='xx-large';}if(typeof window.va==='function'){window.va('event',{name:'invitation_open',data:{guest:name}});}if(typeof window.gtag==='function'){window.gtag('event','invitation_open',{guest:name});}}catch(e){}});
+t_onReady(function(){
+  var form=document.getElementById('form2339662123');
+  if(!form)return;
+  var endpoint='https://formspree.io/f/mykqrbaw';
+  var inputsbox=form.querySelector('.t-form__inputsbox');
+  var successbox=form.querySelector('.js-successbox');
+  function showError(msg){
+    var boxes=form.querySelectorAll('.js-errorbox-all');
+    Array.prototype.forEach.call(boxes,function(b){
+      var t=b.querySelector('.js-rule-error-all');
+      if(t)t.textContent=msg;
+      b.style.display='block';
+    });
+  }
+  function hideError(){
+    Array.prototype.forEach.call(form.querySelectorAll('.js-errorbox-all'),function(b){b.style.display='none';});
+  }
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    hideError();
+    var nom=form.querySelector('input[name="name"]');
+    var nb=form.querySelector('input[name="nbOfGuests"]');
+    var radios=form.querySelectorAll('input[name="isPresent"]');
+    var radioChecked=Array.prototype.some.call(radios,function(r){return r.checked;});
+    if(!nom||!nom.value.trim()||!nb||!nb.value.trim()||!radioChecked){
+      showError('Veuillez remplir tous les champs obligatoires.');
+      return;
+    }
+    var btn=form.querySelector('.t-submit');
+    if(btn){btn.disabled=true;btn.classList.add('t-btn_sending');}
+    fetch(endpoint,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+      .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})
+      .then(function(res){
+        if(res.ok){
+          if(inputsbox)inputsbox.style.display='none';
+          if(successbox){successbox.innerHTML='Merci ! Votre réponse a bien été envoyée.';successbox.style.display='block';}
+        }else{
+          var msg=(res.j&&res.j.errors&&res.j.errors.map(function(x){return x.message;}).join(', '))||"Une erreur s'est produite. Veuillez réessayer.";
+          showError(msg);
+        }
+      })
+      .catch(function(){showError('Erreur réseau. Veuillez réessayer.');})
+      .finally(function(){if(btn){btn.disabled=false;btn.classList.remove('t-btn_sending');}});
+  },true);
+});
+;
+t_onReady(function(){try{var name=new URLSearchParams(window.location.search).get('name');if(!name)return;name=name.trim();if(!name)return;var input=document.getElementById('in-1779545557677')||document.querySelector('input[name="name"]');if(input){input.value=name;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));}var g=document.getElementById('perso-greeting');if(g){g.textContent=name;g.style.display='block';g.style.fontWeight='bold';g.style.fontSize='xx-large';}if(typeof window.va==='function'){window.va('event',{name:'invitation_open',data:{guest:name}});}if(typeof window.gtag==='function'){window.gtag('event','invitation_open',{guest:name});}}catch(e){}});
