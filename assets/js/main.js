@@ -14,7 +14,9 @@ waitForButton('.popup-enter', function(enterButton) {
   const audioControl = document.getElementById('audio-control');
   const iconPlay = document.getElementById('icon-play');
   const iconPause = document.getElementById('icon-pause');
+  let opened = false;
   enterButton.addEventListener('click', function() {
+    opened = true;
     audio.muted = false;
     audio.play().then(() => {
       iconPlay.style.display = 'none';
@@ -23,6 +25,12 @@ waitForButton('.popup-enter', function(enterButton) {
     audioControl.style.visibility = 'visible';
     audioControl.style.opacity = '1';
   });
+  setTimeout(function() {
+    if (!opened) {
+      const target = enterButton.querySelector('.tn-atom') || enterButton;
+      target.click();
+    }
+  }, 60000);
   audioControl.addEventListener('click', function() {
     if (audio.paused) {
       audio.play();
