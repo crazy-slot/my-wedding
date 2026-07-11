@@ -87,6 +87,21 @@ t_onReady(function(){
   var endpoint='https://formspree.io/f/mykqrbaw';
   var inputsbox=form.querySelector('.t-form__inputsbox');
   var successbox=form.querySelector('.js-successbox');
+  var qty=document.getElementById('in-1779545572716');
+  if(qty){
+    var clampQty=function(){var v=parseInt(qty.value,10);if(isNaN(v)||v<1)v=1;qty.value=v;};
+    var stepQty=function(d){clampQty();qty.value=Math.max(1,parseInt(qty.value,10)+d);qty.dispatchEvent(new Event('input',{bubbles:true}));qty.dispatchEvent(new Event('change',{bubbles:true}));};
+    var minus=form.querySelector('.js-qty-minus');
+    var plus=form.querySelector('.js-qty-plus');
+    if(minus)minus.addEventListener('click',function(){stepQty(-1);});
+    if(plus)plus.addEventListener('click',function(){stepQty(1);});
+    qty.addEventListener('blur',clampQty);
+  }
+  var qtyGroup=qty?qty.closest('.t-input-group'):null;
+  function isPresentYes(){var c=form.querySelector('input[name="isPresent"]:checked');return !!c&&c.value.indexOf('Oui')===0;}
+  function syncQtyVisibility(){var yes=isPresentYes();if(qtyGroup)qtyGroup.style.display=yes?'':'none';if(qty)qty.disabled=!yes;}
+  Array.prototype.forEach.call(form.querySelectorAll('input[name="isPresent"]'),function(r){r.addEventListener('change',syncQtyVisibility);});
+  syncQtyVisibility();
   function showError(msg){
     var boxes=form.querySelectorAll('.js-errorbox-all');
     Array.prototype.forEach.call(boxes,function(b){
@@ -106,7 +121,7 @@ t_onReady(function(){
     var nb=form.querySelector('input[name="nbOfGuests"]');
     var radios=form.querySelectorAll('input[name="isPresent"]');
     var radioChecked=Array.prototype.some.call(radios,function(r){return r.checked;});
-    if(!nom||!nom.value.trim()||!nb||!nb.value.trim()||!radioChecked){
+    if(!nom||!nom.value.trim()||!radioChecked||(isPresentYes()&&(!nb||!nb.value.trim()))){
       showError('Veuillez remplir tous les champs obligatoires.');
       return;
     }
