@@ -17,6 +17,8 @@ waitForButton('.popup-enter', function(enterButton) {
   let opened = false;
   enterButton.addEventListener('click', function() {
     opened = true;
+    var greeting = document.getElementById('perso-greeting');
+    if (greeting) greeting.style.display = 'none';
     audio.muted = false;
     audio.play().then(() => {
       iconPlay.style.display = 'none';
