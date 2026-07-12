@@ -153,7 +153,7 @@
     <button type="button" class="btn-primary" id="generate">Générer le lien</button>
 
     <div class="result" id="result">
-      <label for="link">Lien à envoyer</label>
+      <label for="link" id="link-label">Lien à envoyer</label>
       <div class="result-link">
         <input type="text" id="link" readonly>
         <button type="button" class="btn-copy" id="copy">Copier</button>
@@ -172,6 +172,7 @@
       var copyBtn=document.getElementById('copy');
       var whatsapp=document.getElementById('whatsapp');
       var hint=document.getElementById('hint');
+      var linkLabel=document.getElementById('link-label');
 
       function buildLink(name){
         var base=location.origin&&location.origin!=='null'?location.origin:location.href.replace(/\/[^\/]*$/,'');
@@ -189,9 +190,12 @@
         }
         var url=buildLink(name);
         linkInput.value=url;
+        var nameEsc=name.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        linkLabel.innerHTML='Lien de l\'invitation de <strong>'+nameEsc+'</strong> à envoyer';
         var msg='Bonjour '+name+', vous êtes invité(e) au mariage de Naila & Youssef. Voici votre invitation : '+url;
         whatsapp.href='https://wa.me/?text='+encodeURIComponent(msg);
         result.className='result show';
+        guest.value='';
         hint.textContent='';
       }
 
