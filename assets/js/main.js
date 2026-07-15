@@ -54,7 +54,7 @@ waitForButton('.popup-enter', function(enterButton) {
       const target = enterButton.querySelector('.tn-atom') || enterButton;
       target.click();
     }
-  }, 60000);
+  }, 30000);
   audioControl.addEventListener('click', function() {
     if (audio.paused) {
       audio.play();
