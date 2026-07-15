@@ -15,8 +15,30 @@ waitForButton('.popup-enter', function(enterButton) {
   const iconPlay = document.getElementById('icon-play');
   const iconPause = document.getElementById('icon-pause');
   let opened = false;
+  let autoScrollTimer = null;
+  let hasUserScrolledAfterOpen = false;
+  function markUserScrolledAfterOpen() {
+    hasUserScrolledAfterOpen = true;
+    if (autoScrollTimer) {
+      clearTimeout(autoScrollTimer);
+      autoScrollTimer = null;
+    }
+  }
+  function scrollToInvitationDetails() {
+    if (hasUserScrolledAfterOpen) return;
+    const details = document.querySelector('[data-elem-id="1779624381838000001"]');
+    if (details) {
+      details.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+  }
   enterButton.addEventListener('click', function() {
     opened = true;
+    hasUserScrolledAfterOpen = false;
+    if (autoScrollTimer) clearTimeout(autoScrollTimer);
+    window.addEventListener('scroll', markUserScrolledAfterOpen, {once: true, passive: true});
+    window.addEventListener('wheel', markUserScrolledAfterOpen, {once: true, passive: true});
+    window.addEventListener('touchmove', markUserScrolledAfterOpen, {once: true, passive: true});
+    autoScrollTimer = setTimeout(scrollToInvitationDetails, 30000);
     var greeting = document.getElementById('perso-greeting');
     if (greeting) greeting.style.display = 'none';
     audio.muted = false;
