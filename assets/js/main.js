@@ -26,7 +26,7 @@ waitForButton('.popup-enter', function(enterButton) {
   }
   function scrollToInvitationDetails() {
     if (hasUserScrolledAfterOpen) return;
-    const details = document.querySelector('[data-elem-id="1779624381838000001"]');
+    const details = document.getElementById('rec2339662083');
     if (details) {
       details.scrollIntoView({behavior: 'smooth', block: 'start'});
     }
