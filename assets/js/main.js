@@ -166,3 +166,81 @@ t_onReady(function(){
 });
 ;
 t_onReady(function(){try{var name=new URLSearchParams(window.location.search).get('name');if(!name)return;name=name.trim();if(!name)return;var input=document.getElementById('in-1779545557677')||document.querySelector('input[name="name"]');if(input){input.value=name;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));}var g=document.getElementById('perso-greeting');if(g){g.textContent=name;g.style.display='block';g.style.fontWeight='bold';g.style.fontSize='xx-large';}if(typeof window.va==='function'){window.va('event',{name:'invitation_open',data:{guest:name}});}if(typeof window.gtag==='function'){window.gtag('event','invitation_open',{guest:name});}}catch(e){}});
+
+// A lightweight, mobile-first photo story inserted before the RSVP section.
+t_onReady(function() {
+  const anchor = document.getElementById('rec2339662113');
+  if (!anchor || document.getElementById('notre-histoire')) return;
+
+  const story = document.createElement('section');
+  story.id = 'notre-histoire';
+  story.className = 'photo-story';
+  story.setAttribute('aria-labelledby', 'photo-story-title');
+  story.innerHTML = `
+    <p class="photo-story__eyebrow">Quelques pages de</p>
+    <h2 class="photo-story__title" id="photo-story-title">Notre histoire</h2>
+    <span class="photo-story__line" aria-hidden="true"></span>
+    <div class="photo-story__cards">
+      <figure class="photo-story__card">
+        <button class="photo-story__button" type="button" aria-label="Agrandir le souvenir de notre union">
+          <img class="photo-story__photo" src="./assets/img/notre-histoire-coffret.svg" alt="Le coffret et l'acte de mariage de Naila et Youssef" loading="lazy" decoding="async">
+        </button>
+        <figcaption class="photo-story__caption">Le début de notre éternité</figcaption>
+      </figure>
+      <figure class="photo-story__card">
+        <button class="photo-story__button" type="button" aria-label="Agrandir notre acte de mariage">
+          <img class="photo-story__photo" src="./assets/img/notre-histoire-acte.svg" alt="L'acte de mariage signé par Naila et Youssef" loading="lazy" decoding="async">
+        </button>
+        <figcaption class="photo-story__caption">Unis, aujourd'hui et pour toujours</figcaption>
+      </figure>
+    </div>
+    <p class="photo-story__hint">Touchez une photo pour l'agrandir</p>`;
+  anchor.parentNode.insertBefore(story, anchor);
+
+  const lightbox = document.createElement('div');
+  lightbox.className = 'photo-lightbox';
+  lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('aria-modal', 'true');
+  lightbox.setAttribute('aria-label', 'Photo agrandie');
+  lightbox.innerHTML = '<button class="photo-lightbox__close" type="button" aria-label="Fermer">×</button><img class="photo-lightbox__image" alt="">';
+  document.body.appendChild(lightbox);
+
+  const lightboxImage = lightbox.querySelector('.photo-lightbox__image');
+  const closeButton = lightbox.querySelector('.photo-lightbox__close');
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+  story.querySelectorAll('.photo-story__button').forEach(function(button) {
+    button.addEventListener('click', function() {
+      const image = button.querySelector('img');
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt;
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      closeButton.focus();
+    });
+  });
+  closeButton.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(event) {
+    if (event.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
+
+  const cards = story.querySelectorAll('.photo-story__card');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.18});
+    cards.forEach(function(card) { observer.observe(card); });
+  } else {
+    cards.forEach(function(card) { card.classList.add('is-visible'); });
+  }
+});
