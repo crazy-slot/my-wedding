@@ -49,8 +49,8 @@ div.t-records {opacity: 1;}
 .photo-story::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 8% 18%,rgba(255,255,255,.7),transparent 28%),radial-gradient(circle at 92% 78%,rgba(199,161,119,.18),transparent 30%);z-index:-1}
 .photo-story__eyebrow{margin:0 0 5px;font:500 13px/1.4 'LibreBaskerville',serif;letter-spacing:.18em;text-transform:uppercase}
 .photo-story__title{margin:0;font:400 clamp(38px,12vw,58px)/1.08 'newtemplate','Great Vibes',cursive}
-.photo-story__line{display:block;width:112px;height:1px;margin:20px auto 42px;background:#ac9778;position:relative}
-.photo-story__line::after{content:"✦";position:absolute;left:50%;top:50%;padding:0 10px;background:#f9e6d4;transform:translate(-50%,-52%);font-size:12px}
+.photo-story__line{display:block;width:139px;height:28px;margin:14px auto 34px;background:url("../img/line-divider2.png") center/contain no-repeat}
+.photo-story__line::after{content:none}
 .photo-story__cards{max-width:390px;margin:auto;display:grid;gap:38px}
 .photo-story__card{margin:0;padding:10px 10px 24px;background:#fffdf9;box-shadow:0 17px 38px rgba(90,62,38,.18);transform:rotate(-2deg);opacity:0;transition:opacity .8s ease,transform 1s cubic-bezier(.2,.8,.2,1)}
 .photo-story__card:nth-child(even){transform:rotate(2.2deg) translateY(26px)}
