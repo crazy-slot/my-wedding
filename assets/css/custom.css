@@ -43,3 +43,57 @@ div.t-records {opacity: 1;}
 @media screen and (max-width:959px){#rec2339662043 .tn-elem[data-elem-id="1777183175514000099"]{display:table;left:calc(50% - 320px + 40px);}}
 @media screen and (max-width:639px){#rec2339662043 .tn-elem[data-elem-id="1777183175514000099"]{display:table;left:calc(50% - 240px + -40px);}}
 @media screen and (max-width:479px){#rec2339662043 .tn-elem[data-elem-id="1777183175514000099"]{display:table;left:calc(50% - 160px + -118px);}}
+
+/* Mobile-first photo story */
+.photo-story{position:relative;overflow:hidden;padding:72px 18px 86px;background:#f9e6d4;color:#866739;text-align:center;isolation:isolate}
+.photo-story::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 8% 18%,rgba(255,255,255,.7),transparent 28%),radial-gradient(circle at 92% 78%,rgba(199,161,119,.18),transparent 30%);z-index:-1}
+.photo-story__eyebrow{margin:0 0 5px;font:500 13px/1.4 'LibreBaskerville',serif;letter-spacing:.18em;text-transform:uppercase}
+.photo-story__title{margin:0;font:400 clamp(38px,12vw,58px)/1.08 'newtemplate','Great Vibes',cursive}
+.photo-story__line{display:block;width:112px;height:1px;margin:20px auto 42px;background:#ac9778;position:relative}
+.photo-story__line::after{content:"✦";position:absolute;left:50%;top:50%;padding:0 10px;background:#f9e6d4;transform:translate(-50%,-52%);font-size:12px}
+.photo-story__cards{max-width:390px;margin:auto;display:grid;gap:38px}
+.photo-story__card{margin:0;padding:10px 10px 24px;background:#fffdf9;box-shadow:0 17px 38px rgba(90,62,38,.18);transform:rotate(-2deg);opacity:0;transition:opacity .8s ease,transform 1s cubic-bezier(.2,.8,.2,1)}
+.photo-story__card:nth-child(even){transform:rotate(2.2deg) translateY(26px)}
+.photo-story__card.is-visible{opacity:1;transform:rotate(-2deg) translateY(0)}
+.photo-story__card:nth-child(even).is-visible{transform:rotate(2.2deg) translateY(0)}
+.photo-story__button{display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in}
+.photo-story__photo{display:block;width:100%;height:auto;max-height:520px;object-fit:cover;filter:brightness(1.06) contrast(1.09) saturate(.9);transition:filter .25s ease,transform .25s ease}
+.photo-story__button:active .photo-story__photo{transform:scale(.99)}
+.photo-story__caption{margin:17px 6px 0;font:400 25px/1.25 'newtemplate','Great Vibes',cursive;color:#866739}
+.photo-story__hint{margin:52px 0 0;font:italic 13px/1.5 'LibreBaskerville',serif;color:#8c765d}
+.photo-lightbox{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(30,23,18,.92);opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
+.photo-lightbox.is-open{opacity:1;visibility:visible}
+.photo-lightbox__image{display:block;max-width:100%;max-height:88vh;object-fit:contain;box-shadow:0 18px 60px rgba(0,0,0,.45)}
+.photo-lightbox__close{position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;width:44px;height:44px;border:1px solid rgba(255,255,255,.65);border-radius:50%;background:rgba(0,0,0,.2);color:#fff;font:300 30px/40px Arial,sans-serif;cursor:pointer}
+@media (min-width:700px){.photo-story{padding:96px 30px 110px}.photo-story__cards{max-width:850px;grid-template-columns:repeat(2,1fr);gap:48px}.photo-story__card:nth-child(even){margin-top:80px}.photo-story__hint{margin-top:80px}}
+@media (prefers-reduced-motion:reduce){.photo-story__card{opacity:1;transition:none}.photo-lightbox{transition:none}}
+
+/* Phone-free ceremony notice */
+.unplugged-notice{position:relative;padding:72px 26px 76px;overflow:hidden;background:#fffaf5;color:#715937;text-align:center}
+.unplugged-notice::before,.unplugged-notice::after{content:"";position:absolute;width:150px;height:150px;border:1px solid rgba(172,151,120,.28);border-radius:50%}
+.unplugged-notice::before{top:-105px;left:-75px}.unplugged-notice::after{right:-90px;bottom:-105px}
+.unplugged-notice__icon{position:relative;width:62px;height:62px;margin:0 auto 20px;border:1px solid #ac9778;border-radius:50%}
+.unplugged-notice__phone{position:absolute;left:23px;top:14px;width:16px;height:31px;border:1.5px solid #866739;border-radius:3px}
+.unplugged-notice__phone::before{content:"";position:absolute;left:-12px;top:14px;width:39px;height:1.5px;background:#866739;transform:rotate(-48deg);transform-origin:center}
+.unplugged-notice__eyebrow{margin:0 0 8px;font:500 11px/1.5 'LibreBaskerville',serif;letter-spacing:.16em;text-transform:uppercase;color:#9a805b}
+.unplugged-notice__title{margin:0 0 24px;font:400 clamp(36px,11vw,54px)/1.1 'newtemplate','Great Vibes',cursive;color:#866739}
+.unplugged-notice__text{max-width:530px;margin:0 auto 12px;font:400 15px/1.8 'LibreBaskerville',serif;color:#5f554a}
+.unplugged-notice__signature{max-width:500px;margin:27px auto 0;font:400 25px/1.35 'newtemplate','Great Vibes',cursive;color:#866739}
+@media (min-width:700px){.unplugged-notice{padding:92px 40px 96px}.unplugged-notice__text{font-size:16px}}
+
+/* Make opened story photos visibly larger and zoomable on touch screens. */
+.photo-lightbox__image{cursor:zoom-in;touch-action:pinch-zoom}
+.photo-lightbox.is-zoomed{overflow:auto;align-items:flex-start;justify-content:flex-start}
+.photo-lightbox.is-zoomed .photo-lightbox__image{width:180vw;max-width:none;max-height:none;margin:auto;cursor:zoom-out}
+@media (max-width:699px){.photo-lightbox{padding:6px}.photo-lightbox__image{width:calc(100vw - 12px);max-width:none;max-height:calc(100dvh - 12px)}.photo-lightbox__close{position:fixed;z-index:1}.photo-lightbox.is-zoomed .photo-lightbox__image{width:180vw;max-height:none}}
+
+/* Keep Tilda's fixed decorative footer layer from intercepting gallery taps. */
+#rec2355506823 .t396__artboard{pointer-events:none}
+#allrecords .photo-story{z-index:10}
+#allrecords .photo-story__button{position:relative;z-index:11;pointer-events:auto!important;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body>.photo-lightbox{z-index:2147483647!important;pointer-events:none}
+body>.photo-lightbox.is-open{pointer-events:auto}
+
+/* Dress-code palette: keep the selected burgundy swatch and replace brown with navy blue. */
+#rec2355542373 .tn-elem[data-elem-id="1780767598425000011"] .tn-atom{background-color:#4b0f24}
+#rec2355542373 .tn-elem[data-elem-id="1780767598425000014"] .tn-atom{background-color:#17365d}
