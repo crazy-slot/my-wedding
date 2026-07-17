@@ -86,3 +86,4 @@ div.t-records {opacity: 1;}
 .photo-lightbox.is-zoomed{overflow:auto;align-items:flex-start;justify-content:flex-start}
 .photo-lightbox.is-zoomed .photo-lightbox__image{width:180vw;max-width:none;max-height:none;margin:auto;cursor:zoom-out}
 @media (max-width:699px){.photo-lightbox{padding:6px}.photo-lightbox__image{width:calc(100vw - 12px);max-width:none;max-height:calc(100dvh - 12px)}.photo-lightbox__close{position:fixed;z-index:1}.photo-lightbox.is-zoomed .photo-lightbox__image{width:180vw;max-height:none}}
+
