@@ -67,3 +67,16 @@ div.t-records {opacity: 1;}
 .photo-lightbox__close{position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;width:44px;height:44px;border:1px solid rgba(255,255,255,.65);border-radius:50%;background:rgba(0,0,0,.2);color:#fff;font:300 30px/40px Arial,sans-serif;cursor:pointer}
 @media (min-width:700px){.photo-story{padding:96px 30px 110px}.photo-story__cards{max-width:850px;grid-template-columns:repeat(2,1fr);gap:48px}.photo-story__card:nth-child(even){margin-top:80px}.photo-story__hint{margin-top:80px}}
 @media (prefers-reduced-motion:reduce){.photo-story__card{opacity:1;transition:none}.photo-lightbox{transition:none}}
+
+/* Phone-free ceremony notice */
+.unplugged-notice{position:relative;padding:72px 26px 76px;overflow:hidden;background:#fffaf5;color:#715937;text-align:center}
+.unplugged-notice::before,.unplugged-notice::after{content:"";position:absolute;width:150px;height:150px;border:1px solid rgba(172,151,120,.28);border-radius:50%}
+.unplugged-notice::before{top:-105px;left:-75px}.unplugged-notice::after{right:-90px;bottom:-105px}
+.unplugged-notice__icon{position:relative;width:62px;height:62px;margin:0 auto 20px;border:1px solid #ac9778;border-radius:50%}
+.unplugged-notice__phone{position:absolute;left:23px;top:14px;width:16px;height:31px;border:1.5px solid #866739;border-radius:3px}
+.unplugged-notice__phone::before{content:"";position:absolute;left:-12px;top:14px;width:39px;height:1.5px;background:#866739;transform:rotate(-48deg);transform-origin:center}
+.unplugged-notice__eyebrow{margin:0 0 8px;font:500 11px/1.5 'LibreBaskerville',serif;letter-spacing:.16em;text-transform:uppercase;color:#9a805b}
+.unplugged-notice__title{margin:0 0 24px;font:400 clamp(36px,11vw,54px)/1.1 'newtemplate','Great Vibes',cursive;color:#866739}
+.unplugged-notice__text{max-width:530px;margin:0 auto 12px;font:400 15px/1.8 'LibreBaskerville',serif;color:#5f554a}
+.unplugged-notice__signature{max-width:500px;margin:27px auto 0;font:400 25px/1.35 'newtemplate','Great Vibes',cursive;color:#866739}
+@media (min-width:700px){.unplugged-notice{padding:92px 40px 96px}.unplugged-notice__text{font-size:16px}}

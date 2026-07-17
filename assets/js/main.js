@@ -172,6 +172,20 @@ t_onReady(function() {
   const anchor = document.getElementById('rec2339662113');
   if (!anchor || document.getElementById('notre-histoire')) return;
 
+  const unpluggedNotice = document.createElement('section');
+  unpluggedNotice.className = 'unplugged-notice';
+  unpluggedNotice.setAttribute('aria-labelledby', 'unplugged-notice-title');
+  unpluggedNotice.innerHTML = `
+    <div class="unplugged-notice__icon" aria-hidden="true">
+      <span class="unplugged-notice__phone"></span>
+    </div>
+    <p class="unplugged-notice__eyebrow">Un instant pleinement partagé</p>
+    <h2 class="unplugged-notice__title" id="unplugged-notice-title">Cérémonie déconnectée</h2>
+    <p class="unplugged-notice__text">Afin de vivre pleinement ce moment ensemble, nous vous remercions de garder vos téléphones rangés et de ne prendre ni photo ni vidéo durant la cérémonie.</p>
+    <p class="unplugged-notice__text">Notre photographe se chargera d'immortaliser ces précieux instants.</p>
+    <p class="unplugged-notice__signature">Vos regards et vos sourires seront nos plus beaux souvenirs.</p>`;
+  anchor.parentNode.insertBefore(unpluggedNotice, anchor);
+
   const story = document.createElement('section');
   story.id = 'notre-histoire';
   story.className = 'photo-story';
