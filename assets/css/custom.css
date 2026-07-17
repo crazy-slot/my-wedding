@@ -80,3 +80,10 @@ div.t-records {opacity: 1;}
 .unplugged-notice__text{max-width:530px;margin:0 auto 12px;font:400 15px/1.8 'LibreBaskerville',serif;color:#5f554a}
 .unplugged-notice__signature{max-width:500px;margin:27px auto 0;font:400 25px/1.35 'newtemplate','Great Vibes',cursive;color:#866739}
 @media (min-width:700px){.unplugged-notice{padding:92px 40px 96px}.unplugged-notice__text{font-size:16px}}
+
+/* Make opened story photos visibly larger and zoomable on touch screens. */
+.photo-lightbox__image{cursor:zoom-in;touch-action:pinch-zoom}
+.photo-lightbox.is-zoomed{overflow:auto;align-items:flex-start;justify-content:flex-start}
+.photo-lightbox.is-zoomed .photo-lightbox__image{width:180vw;max-width:none;max-height:none;margin:auto;cursor:zoom-out}
+@media (max-width:699px){.photo-lightbox{padding:6px}.photo-lightbox__image{width:calc(100vw - 12px);max-width:none;max-height:calc(100dvh - 12px)}.photo-lightbox__close{position:fixed;z-index:1}.photo-lightbox.is-zoomed .photo-lightbox__image{width:180vw;max-height:none}}
+

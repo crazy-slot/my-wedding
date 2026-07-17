@@ -222,7 +222,7 @@ t_onReady(function() {
   const lightboxImage = lightbox.querySelector('.photo-lightbox__image');
   const closeButton = lightbox.querySelector('.photo-lightbox__close');
   function closeLightbox() {
-    lightbox.classList.remove('is-open');
+    lightbox.classList.remove('is-open', 'is-zoomed');
     document.body.style.overflow = '';
   }
   story.querySelectorAll('.photo-story__button').forEach(function(button) {
@@ -230,12 +230,18 @@ t_onReady(function() {
       const image = button.querySelector('img');
       lightboxImage.src = image.src;
       lightboxImage.alt = image.alt;
+      lightbox.classList.remove('is-zoomed');
+
       lightbox.classList.add('is-open');
       document.body.style.overflow = 'hidden';
       closeButton.focus();
     });
   });
   closeButton.addEventListener('click', closeLightbox);
+  lightboxImage.addEventListener('click', function() {
+    lightbox.classList.toggle('is-zoomed');
+  });
+
   lightbox.addEventListener('click', function(event) {
     if (event.target === lightbox) closeLightbox();
   });
