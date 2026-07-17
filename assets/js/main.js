@@ -196,8 +196,8 @@ t_onReady(function() {
     <span class="photo-story__line" aria-hidden="true"></span>
     <div class="photo-story__cards">
       <figure class="photo-story__card">
-        <button class="photo-story__button" type="button" aria-label="Agrandir le souvenir de notre union">
-          <img class="photo-story__photo" src="./assets/img/notre-histoire-coffret.svg" alt="Le coffret et l'acte de mariage de Naila et Youssef" loading="lazy" decoding="async">
+        <button class="photo-story__button" type="button" aria-label="Agrandir la photo de notre gâteau de mariage">
+          <img class="photo-story__photo" src="./assets/img/notre-histoire-gateau.svg" alt="Le gâteau de mariage de Youssef et Naila entouré de fleurs et de bougies" loading="lazy" decoding="async">
         </button>
         <figcaption class="photo-story__caption">Le début de notre éternité</figcaption>
       </figure>
