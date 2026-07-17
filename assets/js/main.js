@@ -231,7 +231,6 @@ t_onReady(function() {
       lightboxImage.src = image.src;
       lightboxImage.alt = image.alt;
       lightbox.classList.remove('is-zoomed');
-
       lightbox.classList.add('is-open');
       document.body.style.overflow = 'hidden';
       closeButton.focus();
@@ -241,7 +240,6 @@ t_onReady(function() {
   lightboxImage.addEventListener('click', function() {
     lightbox.classList.toggle('is-zoomed');
   });
-
   lightbox.addEventListener('click', function(event) {
     if (event.target === lightbox) closeLightbox();
   });

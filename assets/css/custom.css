@@ -87,3 +87,13 @@ div.t-records {opacity: 1;}
 .photo-lightbox.is-zoomed .photo-lightbox__image{width:180vw;max-width:none;max-height:none;margin:auto;cursor:zoom-out}
 @media (max-width:699px){.photo-lightbox{padding:6px}.photo-lightbox__image{width:calc(100vw - 12px);max-width:none;max-height:calc(100dvh - 12px)}.photo-lightbox__close{position:fixed;z-index:1}.photo-lightbox.is-zoomed .photo-lightbox__image{width:180vw;max-height:none}}
 
+/* Keep Tilda's fixed decorative footer layer from intercepting gallery taps. */
+#rec2355506823 .t396__artboard{pointer-events:none}
+#allrecords .photo-story{z-index:10}
+#allrecords .photo-story__button{position:relative;z-index:11;pointer-events:auto!important;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body>.photo-lightbox{z-index:2147483647!important;pointer-events:none}
+body>.photo-lightbox.is-open{pointer-events:auto}
+
+/* Dress-code palette: keep the selected burgundy swatch and replace brown with navy blue. */
+#rec2355542373 .tn-elem[data-elem-id="1780767598425000011"] .tn-atom{background-color:#4b0f24}
+#rec2355542373 .tn-elem[data-elem-id="1780767598425000014"] .tn-atom{background-color:#17365d}
