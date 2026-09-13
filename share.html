@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Générer un lien d'invitation · Naila &amp; Youssef</title>
+  <title>Générer un lien d'invitation · Le Quinceañero de Juliana</title>
   <link rel="icon" type="image/png" href="./assets/img/tild3263-3561-4339-a533-643564366236-ic_baseline-place_1.png">
   <style>
     :root{
       --bg:#f9e6d4;
       --card:#fffaf3;
       --accent:#ac9778;
-      --accent-dark:#866739;
-      --btn:#747b54;
+      --accent-dark:#8A55C5;
+      --btn:#6435A9;
       --btn-hover:#616b47;
       --text:#2a2a2a;
     }
@@ -56,7 +56,9 @@
       font-size:16px;
       color:var(--text);
     }
-    input[type="text"]{
+    input[type="text"],
+    input[type="number"],
+    select{
       width:100%;
       height:48px;
       padding:0 14px;
@@ -68,7 +70,10 @@
       border-radius:8px;
       outline:none;
     }
-    input[type="text"]:focus{border-color:var(--accent-dark);}
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus{border-color:var(--accent-dark);}
+    .field + .field{margin-top:18px;}
     button{
       font-family:inherit;
       cursor:pointer;
@@ -145,10 +150,25 @@
 <body>
   <div class="card">
     <h1>Lien d'invitation</h1>
-    <p class="subtitle">Naila &amp; Youssef · 21 Août 2026</p>
+    <p class="subtitle">Le Quinceañero de Juliana · 17 octobre 2026</p>
 
-    <label for="guest">Nom de l'invité</label>
-    <input type="text" id="guest" placeholder="Ex : Youssef, Naila AMARA, La famille AMARA, etc." autocomplete="off">
+    <div class="field">
+      <label for="guest">Nom de l'invité</label>
+      <input type="text" id="guest" placeholder="Ex : Camille, la famille Martin, etc." autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label for="max-guests">Nombre maximum de personnes</label>
+      <input type="number" id="max-guests" min="1" step="1" value="1" inputmode="numeric">
+    </div>
+
+    <div class="field">
+      <label for="language">Langue de l'invitation</label>
+      <select id="language">
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+      </select>
+    </div>
 
     <button type="button" class="btn-primary" id="generate">Générer le lien</button>
 
@@ -166,6 +186,8 @@
   <script>
     (function(){
       var guest=document.getElementById('guest');
+      var maxGuestsInput=document.getElementById('max-guests');
+      var languageInput=document.getElementById('language');
       var generate=document.getElementById('generate');
       var result=document.getElementById('result');
       var linkInput=document.getElementById('link');
@@ -174,13 +196,15 @@
       var hint=document.getElementById('hint');
       var linkLabel=document.getElementById('link-label');
 
-      function buildLink(name){
+      function buildLink(name,maxGuests,language){
         var base=location.origin&&location.origin!=='null'?location.origin:location.href.replace(/\/[^\/]*$/,'');
-        return base+'/?name='+encodeURIComponent(name);
+        return base+'/?name='+encodeURIComponent(name)+'&maxGuests='+maxGuests+'&lang='+language;
       }
 
       function doGenerate(){
         var name=guest.value.trim();
+        var maxGuests=Number(maxGuestsInput.value);
+        var language=languageInput.value==='es'?'es':'fr';
         hint.className='hint';
         if(!name){
           hint.className='hint error';
@@ -188,11 +212,19 @@
           result.className='result';
           return;
         }
-        var url=buildLink(name);
+        if(!Number.isInteger(maxGuests)||maxGuests<1){
+          hint.className='hint error';
+          hint.textContent='Veuillez saisir un nombre maximum valide (au moins 1).';
+          result.className='result';
+          return;
+        }
+        var url=buildLink(name,maxGuests,language);
         linkInput.value=url;
         var nameEsc=name.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-        linkLabel.innerHTML='Lien de l\'invitation de <strong>'+nameEsc+'</strong> à envoyer';
-        var msg='Bonjour '+name+', vous êtes invité(e) au mariage de Naila & Youssef. Voici votre invitation : '+url;
+        linkLabel.innerHTML='Lien de l\'invitation de <strong>'+nameEsc+'</strong> ('+maxGuests+' personne'+(maxGuests>1?'s':'')+' maximum) à envoyer';
+        var msg=language==='es'
+          ? 'Hola '+name+', te invitamos a celebrar el Quinceañero de Juliana. Esta invitación es válida para un máximo de '+maxGuests+' persona'+(maxGuests>1?'s':'')+'. Aquí tienes tu invitación: '+url
+          : 'Bonjour '+name+', vous êtes invité(e) à célébrer le Quinceañero de Juliana. Cette invitation est valable pour '+maxGuests+' personne'+(maxGuests>1?'s':'')+' maximum. Voici votre invitation : '+url;
         whatsapp.href='https://wa.me/?text='+encodeURIComponent(msg);
         result.className='result show';
         guest.value='';
@@ -201,6 +233,7 @@
 
       generate.addEventListener('click',doGenerate);
       guest.addEventListener('keydown',function(e){if(e.key==='Enter')doGenerate();});
+      maxGuestsInput.addEventListener('keydown',function(e){if(e.key==='Enter')doGenerate();});
 
       copyBtn.addEventListener('click',function(){
         linkInput.select();
